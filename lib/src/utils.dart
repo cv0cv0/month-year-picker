@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'l10n/month_year_picker_localizations.dart';
 
+DateTime yearOnly(DateTime dateTime) {
+  return DateTime(dateTime.year);
+}
+
 DateTime monthYearOnly(DateTime dateTime) {
   return DateTime(dateTime.year, dateTime.month);
 }

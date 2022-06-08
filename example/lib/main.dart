@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(DateFormat().add_yM().format(_selected!)),
             TextButton(
               child: const Text('DEFAULT LOCALE'),
-              onPressed: () => _onPressed(context: context),
+              onPressed: () => _onPressed(context: context, locale: 'zh'),
             ),
             TextButton(
               child: const Text('BAHASA MALAYSIA'),
@@ -83,8 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       initialDate: _selected ?? DateTime.now(),
       firstDate: DateTime(2019),
-      lastDate: DateTime(2022),
+      lastDate: DateTime(2100),
       locale: localeObj,
+      initialMonthYearPickerMode: MonthYearPickerMode.year,
     );
     // final selected = await showDatePicker(
     //   context: context,

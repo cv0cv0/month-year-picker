@@ -32,7 +32,11 @@ Future<DateTime?> showMonthYearPicker({
   TransitionBuilder? builder,
   MonthYearPickerMode initialMonthYearPickerMode = MonthYearPickerMode.month,
 }) async {
-  initialDate = monthYearOnly(initialDate);
+  if (initialMonthYearPickerMode == MonthYearPickerMode.year) {
+    initialDate = yearOnly(initialDate);
+  } else {
+    initialDate = monthYearOnly(initialDate);
+  }
   firstDate = monthYearOnly(firstDate);
   lastDate = monthYearOnly(lastDate);
 
@@ -131,7 +135,7 @@ class _MonthYearPickerDialogState extends State<MonthYearPickerDialog> {
             : Offset.zero;
     switch (orientation) {
       case Orientation.portrait:
-        return _portraitDialogSize + offset;
+        return _portraitDialogSize;
       case Orientation.landscape:
         return _landscapeDialogSize + offset;
     }
@@ -371,9 +375,11 @@ class _MonthYearPickerDialogState extends State<MonthYearPickerDialog> {
 
   void _updateYear(DateTime date) {
     setState(() {
-      _selectedDate = DateTime(date.year, _selectedDate.month);
-      _isShowingYear = false;
-      _monthPickerState.currentState!.goToYear(year: _selectedDate.year);
+      _selectedDate = DateTime(date.year);
+      if (widget.initialMonthYearPickerMode == MonthYearPickerMode.month) {
+        _isShowingYear = false;
+        _monthPickerState.currentState!.goToYear(year: _selectedDate.year);
+      }
     });
   }
 
